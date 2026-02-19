@@ -31,7 +31,12 @@ export const AuthProvider = ({ children }) => {
                 return false;
             }
         } catch (error) {
-            alert('Login failed!');
+            console.error("Login Error:", error);
+            if (error.response) {
+                alert(`Login failed: ${error.response.data.detail || JSON.stringify(error.response.data)}`);
+            } else {
+                alert('Login failed: Network or server error.');
+            }
             return false;
         }
     };
